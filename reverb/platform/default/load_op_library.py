@@ -27,7 +27,7 @@ built on the same or the next night.  If you are using a release version package
 'tensorflow', use a release package 'dm-reverb' built to be compatible with
 that exact version.  If all else fails, file a github issue on deepmind/reverb.
 Current installed version of tensorflow: {tf_version}.
-""".format(tf_version=tf.__version__)
+""".format(tf_version=getattr(tf, '__version__', None))
 
 
 def reraise_wrapped_error(error: Exception):

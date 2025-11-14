@@ -22,6 +22,7 @@
 #include "absl/status/status_matchers.h"
 #include "reverb/cc/platform/status_matchers.h"
 #include "reverb/cc/testing/tensor_testutil.h"
+#include "reverb/cc/platform/status_matchers.h"
 #include "tensorflow/core/framework/register_types.h"
 #include "tensorflow/core/framework/tensor.h"
 #include "tensorflow/core/framework/tensor.pb.h"

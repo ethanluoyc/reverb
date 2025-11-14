@@ -25,11 +25,7 @@ from setuptools import setup
 from setuptools.command.install import install as InstallCommandBase
 from setuptools.dist import Distribution
 
-import reverb_version
-
-# Defaults if doing a release build.
-TENSORFLOW_VERSION = 'tensorflow~=2.14.0'
-
+TENSORFLOW_VERSION = 'tf-nightly'
 
 class BinaryDistribution(Distribution):
 
@@ -72,18 +68,17 @@ class SetupToolsHelper(object):
     """Returns the version and project name to associate with the build."""
     if self.release:
       project_name = 'dm-reverb'
-      version = reverb_version.__rel_version__
     else:
       project_name = 'dm-reverb-nightly'
-      version = reverb_version.__dev_version__
-      version += datetime.datetime.now().strftime('%Y%m%d')
 
+    version = os.environ['version']
     return version, project_name
 
   def _get_required_packages(self):
     """Returns list of required packages."""
     required_packages = [
         'dataclasses; python_version < "3.7.0"',  # Back-port for Python 3.6.
+        "absl-py",
         'dm-tree',
         'portpicker',
     ]

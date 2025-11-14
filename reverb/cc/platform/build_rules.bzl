@@ -18,8 +18,8 @@ load(
     _reverb_pytype_library = "reverb_pytype_library",
     _reverb_pytype_strict_binary = "reverb_pytype_strict_binary",
     _reverb_pytype_strict_library = "reverb_pytype_strict_library",
-    _reverb_tf_deps = "reverb_tf_deps",
     _reverb_tf_ops_visibility = "reverb_tf_ops_visibility",
+    _reverb_tf_deps = "reverb_tf_deps",
 )
 
 reverb_absl_deps = _reverb_absl_deps

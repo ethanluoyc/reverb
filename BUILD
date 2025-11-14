@@ -1,3 +1,3 @@
 licenses(["notice"])  # Apache 2.0
 
-exports_files(["LICENSE"])
+exports_files(glob(["requirements*.txt"]) + ["LICENSE", "README.md"])

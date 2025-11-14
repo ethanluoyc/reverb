@@ -23,6 +23,7 @@
 #   export PYTHON_BIN_PATH=$(which python3)
 #   bash run_python_tests.sh
 set +x
+set -e
 
 py_test() {
   local exit_code=0
@@ -32,7 +33,7 @@ py_test() {
   for test_file in `find reverb/ -name '*_test.py' -print`
   do
     echo "####=======Testing ${test_file}=======####"
-    ${PYTHON_BIN_PATH} "${test_file}"
+    python3 "${test_file}"
     _exit_code=$?
     if [[ $_exit_code != 0 ]]; then
       exit_code=$_exit_code
