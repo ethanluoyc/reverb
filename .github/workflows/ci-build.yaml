@@ -1,0 +1,40 @@
+name: CI
+
+on: [push]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  Tests:
+    runs-on: ubuntu-latest
+    strategy:
+        # Don't fail fast - want to see results for all builds even if one fails.
+      fail-fast: false
+      matrix:
+        job_info: [
+          {
+            name: "Linux x86 CPU"
+          }
+        ]
+    name: ${{ matrix.job_info.name }}
+    defaults:
+      run:
+        shell: bash
+    timeout-minutes: 60
+    steps:
+      - name: "Checking out repository"
+        uses: actions/checkout@v5
+      - uses: bazel-contrib/setup-bazel@0.15.0
+        with:
+          # Avoid downloading Bazel every time.
+          bazelisk-cache: true
+          # Store build cache per workflow.
+          disk-cache: ${{ github.workflow }}
+          # Share repository cache between workflows.
+          repository-cache: true
+      - name: "Run tests"
+        run: | 
+          bazel version
+          bazel test '//reverb/...'
